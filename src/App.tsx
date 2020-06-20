@@ -22,12 +22,11 @@ export default class App extends React.PureComponent<{}, IState> {
     document.addEventListener('resume', () => this.logEventToState('Resume'), false)
 
     if (BackgroundGeolocation) {
-      console.log('LocationWatcher mounts')
+      console.log('Mounting app, starting plugin')
       
       // Initialize the library
-      // Without this, pause and resume will act like any normal cordova app
+      // Without these, pause and resume will act like any normal cordova app
       this.setupGeoLocationPlugin()
-      
       document.addEventListener('pause', () => this.onPauseApp(), false)
       document.addEventListener('resume', () => this.onResumeApp(), false)
     }
@@ -58,7 +57,7 @@ export default class App extends React.PureComponent<{}, IState> {
   public setupGeoLocationPlugin = () => {
     if (BackgroundGeolocation) {
       BackgroundGeolocation.onLocation((location) => this.onLocationSuccess(location), (error) => console.error('[onLocation] ERROR: ', JSON.stringify(error)))
-      BackgroundGeolocation.ready({})
+      BackgroundGeolocation.ready({ reset: true })
     }
   }
 
