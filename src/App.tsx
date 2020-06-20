@@ -23,7 +23,7 @@ export default class App extends React.PureComponent<{}, IState> {
 
     if (BackgroundGeolocation) {
       console.log('Mounting app, starting plugin')
-      
+
       // Initialize the library
       // Without these, pause and resume will act like any normal cordova app
       this.setupGeoLocationPlugin()
@@ -57,7 +57,7 @@ export default class App extends React.PureComponent<{}, IState> {
   public setupGeoLocationPlugin = () => {
     if (BackgroundGeolocation) {
       BackgroundGeolocation.onLocation((location) => this.onLocationSuccess(location), (error) => console.error('[onLocation] ERROR: ', JSON.stringify(error)))
-      BackgroundGeolocation.ready({ reset: true })
+      BackgroundGeolocation.ready({ reset: true, logLevel: BackgroundGeolocation.LOG_LEVEL_VERBOSE })
     }
   }
 
